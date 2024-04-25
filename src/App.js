@@ -26,7 +26,7 @@ function App() {
                 <a
                   href="#"
                   className="text-xl hover:bg-gray-700 px-3 py-2 rounded-md"
-                >
+                > 
                   About
                 </a>
                 <a
