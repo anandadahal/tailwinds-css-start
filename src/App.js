@@ -1,6 +1,17 @@
 import "./App.css";
+import { useState } from "react";
 
 function App() {
+  const [count,setCount]=useState(0)
+
+
+
+  const handelclick=()=>{
+    setCount(count+1)
+  }
+  const handelclick2=()=>{
+    setCount(count-1)
+  }
   return (
     <>
       {/*     
@@ -48,6 +59,13 @@ function App() {
               </div>
             </div>
           </div>
+
+<div className="flex flex-col items-center justify-center">
+  <p className="text-3xl mb-4 ">count:{count} </p>
+  <button className="px-4 py-2 rounded-md bg-black hover:bg-blue-600 text-white" onClick={handelclick}>increment</button><br></br>
+  <button className="px-4 py-2 rounded-md bg-red-500 hover:bg-red-600 text-white" onClick={handelclick2}>decrement</button>
+</div>
+
     
      
     </>
