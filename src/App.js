@@ -1,10 +1,12 @@
 import "./App.css";
 import { useState } from "react";
+import Child from "./Component/child"
 
 function App() {
   const [count,setCount]=useState(0)
 
-
+const age=10;
+const name="ananda";
 
   const handelclick=()=>{
     setCount(count+1)
@@ -60,13 +62,13 @@ function App() {
             </div>
           </div>
 
-<div className="flex flex-col items-center justify-center">
-  <p className="text-3xl mb-4 ">count:{count} </p>
-  <button className="px-4 py-2 rounded-md bg-black hover:bg-blue-600 text-white" onClick={handelclick}>increment</button><br></br>
-  <button className="px-4 py-2 rounded-md bg-red-500 hover:bg-red-600 text-white" onClick={handelclick2}>decrement</button>
+<div className="flex flex-col bg-emerald-400 p-4 items-center justify-center">
+  <p className="text-3xl mb-4 font-bold text-white  ">Count : {count} </p>
+  <button className="px-4 py-2 rounded-md bg-black hover:bg-blue-600 text-white" onClick={handelclick}>Increment</button><br></br>
+  <button className="px-4 py-2 rounded-md bg-red-500 hover:bg-red-800 text-white" onClick={handelclick2}>Decrement</button>
 </div>
 
-    
+    <Child name={name} age={age}/>
      
     </>
   );
