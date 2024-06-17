@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useDispatch } from 'react-redux';
-import { signInUser } from '../Redux/authSlice'; // Assuming you have a signInUser action in authSlice
+import { useDispatch, useSelector } from 'react-redux';
+import { signInUser } from '../Redux/authSlice'; // Ensure this action is correctly imported
+import { Link, useNavigate } from 'react-router-dom'; // Using useNavigate instead of useHistory
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 
 const schema = yup.object().shape({
@@ -26,9 +27,14 @@ const LoginForm = () => {
   });
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { loading, error, user } = useSelector((state) => state.user);
 
-  const onSubmit = (data) => {
-    dispatch(signInUser(data)); // Assuming signInUser action takes email and password as parameters
+  const onSubmit = async (data) => {
+    await dispatch(signInUser(data));
+    if (user) {
+      navigate('/dashboard');
+    }
   };
 
   const togglePasswordVisibility = () => {
@@ -68,10 +74,16 @@ const LoginForm = () => {
         <button
           type="submit"
           className="w-full px-4 py-2 bg-indigo-600 text-white rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          disabled={loading}
         >
-          Login
+          {loading ? 'Logging in...' : 'Login'}
         </button>
       </form>
+
+     <Link to="/register">
+     <button className='mt-12 bg-blend-color-dodge bg-sky-500 px-5 py-6'>register</button>
+     </Link>
+      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
     </div>
   );
 };
