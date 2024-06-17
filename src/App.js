@@ -14,7 +14,7 @@ function App() {
 
 <Route path="/register" element={<Register/>}/>
 
-
+<Route path="/dashboard" element={<Child />} />
 </Routes>
 
   </BrowserRouter>

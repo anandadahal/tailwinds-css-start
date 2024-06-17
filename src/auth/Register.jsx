@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -22,19 +22,18 @@ const RegisterForm = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate(); // Initialize useNavigate
-  const [registered, setRegistered] = useState(false); // State variable to track registration status
 
-  const onSubmit = (data) => {
-    dispatch(signUpUser({ username: data.username, password: data.password }))
-      .then(() => {
-        setRegistered(true); // Set registered state to true after successful registration
-       <p>Login successfull</p>
-        navigate("/"); // Redirect to login page
-      })
-      .catch((error) => {
-        console.error('Registration failed:', error);
-      });
+  const onSubmit = async (data) => {
+    try {
+      await dispatch(signUpUser({ username: data.username, password: data.password })).unwrap();
+      alert('Registrationfdfdfdffdf successful'); // Show success message
+      navigate("/"); // Redirect to the login page after successful registration
+    } catch (error) {
+      console.error('Registration failed:', error);
+      alert('Registration failed. Please try again.'); // Show error message
+    }
   };
+
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded-md">
       <h2 className="text-2xl font-bold mb-4">Register</h2>
